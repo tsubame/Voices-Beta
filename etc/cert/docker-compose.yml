@@ -1,0 +1,19 @@
+version: "3"
+services:
+  cert_nginx:
+    image: nginx:1.19.2-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ./html:/var/www/html
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./html:/var/www/html
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+    command: ["--version"]

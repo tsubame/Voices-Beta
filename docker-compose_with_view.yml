@@ -1,0 +1,67 @@
+version: "3"
+services:
+  go:
+    container_name: go
+    build:
+      context: .
+      dockerfile: ./go/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./go:/usr/local/go/src/main
+    depends_on:
+      - mysql
+    env_file:
+      - .env   
+    tty: true      
+
+  vue:
+    container_name: vue  
+    build:
+      context: .
+      dockerfile: ./vue/Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./vue:/app
+    command: npm run serve    
+    tty: true  
+
+  mysql:
+    container_name: mysql
+    platform: linux/x86_64
+    image: mysql:8.0    
+    env_file:
+      - .env   
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes' 
+    ports:
+      - "3306:3306"
+    volumes:
+      #- ./mysql/data:/var/lib/mysql
+      - ../mysqldata:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/sql:/docker-entrypoint-initdb.d      
+    command: ['mysqld', '--innodb_use_native_aio=0', '--default-authentication-plugin=mysql_native_password']
+
+  nginx:
+    image: nginx
+    depends_on:
+      - go
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: ./etc/nginx/Dockerfile    
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - TZ=Asia/Tokyo
+    command: "/bin/sh -c 'while :; do sleep 20d & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"   
+    volumes:
+      # nginxの設定ファイル
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
+      # nginxのルートパス
+      - ./vue/dist:/usr/share/nginx/html
+      # let's encrypt
+      - /etc/letsencrypt:/etc/letsencrypt

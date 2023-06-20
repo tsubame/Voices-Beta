@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<style type="text/css">
+<!--
+
+/*======================================================
+/* 
+/* 1. タグ定義
+/* 
+/*======================================================*/
+
+html {
+	overflow-y: scroll;             
+	font-size: 10px;  
+	*font-size: 62.5%;
+	padding: 0px;
+}
+
+body {
+	margin: 0;
+	width: 99%;
+	padding: 0;
+	background-color:#FDFCF9;/*#eceae2;*/
+	color: #000000;
+	font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+	font-size: 140%;
+}
+
+/* ヘッダ */
+header {
+	margin: 0px;
+	padding-bottom: 8px;
+	background-color: #FFFFFF;	
+}
+/* ヘッダ内コンテナ */
+header .container {
+	width: 100%;
+}
+header #logo_img {
+	padding-left: 28px;
+}
+header #logo_text {
+	padding-top: 20px;
+	border: #000000 0px solid;
+}
+/* ナビバー */
+nav {
+	border: #000000 1px solid;
+}
+
+a.navbar-brand {
+	font-size: 140%;
+	margin: 12px 20px 12px 20px;		
+}
+
+div#main {
+	margin: 0px;
+}
+
+/* メイン領域内コンテナ */ 
+div#main .container {
+	padding: 60px 20px;
+	/*border-radius: 20px;*/
+	/*box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .2);	*/
+}
+
+/* 見出し */
+h1 {
+	margin-top: 32px;
+	padding-left: 12px;
+	font-size: 140%;
+	vertical-align: middle;
+}
+h2.green {
+	width: 98%;
+	margin: 0 auto;
+	padding: 12px;
+	padding-left: 32px;
+	background: #E2EFDA;
+	position: relative;
+	font-size: 120%;
+}
+h2.green:before {
+	background: #A9D08E;
+	content: "";
+	position: absolute;
+	display: block;
+	top: 12px;
+	left: 12px;
+	width: 5px;
+	height: 20px;
+}
+h2.blue {
+	width: 98%;
+	margin: 0 auto;
+	padding: 4px;
+	padding-left: 32px;
+	background: #E7F3FA;
+	position: relative;
+	font-size: 120%;
+}
+
+h2.blue:before {
+	background: #008CCF;
+	content: "";
+	position: absolute;
+	display: block;
+	top: 4px;
+	left: 10px;
+	width: 5px;
+	height: 20px;
+}
+h3.green {
+	width: 98%;
+	margin: 0 auto;
+	padding: 12px;
+	padding-left: 32px;
+	background: #FFFFFF;
+	position: relative;
+	font-size: 120%;
+}
+h3.green:before {
+	background: #A9D08E;
+	content: "";
+	position: absolute;
+	display: block;
+	top: 12px;
+	left: 12px;
+	width: 5px;
+	height: 20px;
+}
+/* テーブル */
+table {
+	margin: 40px 0px;
+	border-collapse: collapse;
+	border: 1px solid #443510;
+}	
+tr {
+	margin: 0;
+	border-left: solid 1px #333333;
+	border-right: solid 1px #333333;
+}	
+th {
+	background: #EDE3CB; /*#dfdac7;*/	
+	border-bottom: solid 1px #666666;
+}
+td {
+	margin: 0;
+	border-top: solid 1px #AAAAAA;
+	background: #fdfdfc;
+}
+
+/*======================================================
+/* 
+/* 2. id、class要素
+/* 
+/*======================================================*/
+
+/* 新着情報 */
+div#information_area {
+	margin-bottom: 60px;
+	padding: 20px;
+	border: solid 1px #999999;
+	box-shadow: 0px 0px 10px #DDDDDD;
+}
+div#information_area p {
+	margin-top: 20px;
+	padding: 40px 20px 20px;
+	border-top: solid 1px #999999;
+}
+
+/* 説明テーブル */
+table#desc {
+	margin-bottom: 100px;
+}
+table#desc td {
+	padding: 12px 30px;
+}
+table#desc th {
+	padding: 12px;
+	font-size: 90%;
+}
+table#desc th.h_txt {
+	padding: 12px;
+	font-size: 90%;
+	background: #f1ece1; /*#eceae2;*/
+	border-right: #999999 1px solid;
+	border-bottom: #999999 1px solid;
+}
+
+/*　キャラクターテーブル */
+table#chara {
+	min-width: 80px;
+	padding: 8px;
+	margin: 0;
+	margin-top: 40px;	
+	margin-bottom: 12px;	
+}
+table#chara tr {
+	margin: 0;
+}
+table#chara td {
+	padding: 8px 8px;
+}
+table#chara td.name {
+
+}
+/* 名前 */
+table#chara td.name span {
+	margin: auto;
+	display: block;
+	padding: 8px;
+	border-radius: 6px;
+}
+table#chara td.count,  table#chara td.sex {
+	padding: 8px 4px;
+	text-align: center;
+	font-size: 90%;
+	color: #333333;
+}
+table#chara td.check {
+	text-align: center;
+}
+table#chara th {
+	padding: 8px;
+	font-size: 80%;
+	text-align: center;
+}
+
+/* キャラの下の説明 */
+div#check_explain {
+	margin-bottom: 120px;
+	padding-left: 20px; 
+	text-align: right;
+}
+
+/* 台本テーブル */
+table.script {
+	width: 100%;
+	margin: 40px 0;
+}
+table.script th {
+	padding: 0px;
+	font-size: 80%;
+	/*background: #eceae2;*/
+	text-align: center;
+}
+table.script td {
+	padding: 12px 16px;
+}
+td.check_mark {
+	width: 2px;
+	padding: 0px;
+	/*background-color: #fbf8e5;*/
+}
+td.mark span {
+	display: block;
+	height: 40px;
+	margin: -10px 0;
+	border: solid 1px #000000;
+}
+td.name {
+	min-width: 120px;
+	padding: 8px;
+	text-align: center;
+}
+
+td.name span {
+	margin: auto;
+	display: block;
+	padding: 8px;
+	border-radius: 6px;
+	border: solid 0px #333333;
+}
+tr.narration td.name span {
+	color: #FFFFFF;
+}
+tr.chara_0 td.name span {
+	background: #fbf8c4; 
+	border: solid 1px #f7ed33;
+}		
+td.name span.chara_0 {
+	background: #fbf8c4; 
+}
+tr.chara_1 td.name span {
+	background: #ffe0e0;
+	border: solid 1px #f9c1c1;	
+}		
+td.name span.chara_1 {
+	background: #ffe0e0;
+}
+td.name span.chara_2 {
+	background: #e2f2fe;
+}
+td.name span.chara_3 {
+	background: #e9e9e9;
+}
+td.name span.chara_4 {
+	background: #edf9d7;
+}
+td.name span.chara_5 {
+	background: #f7eed0;
+}
+td.text {
+	width: 89%;
+	padding: 8px 20px;
+	line-height: 120%;
+}	
+-->
+	</style>
+	<script type="text/javascript">
+
+
+	$(function() {
+
+		// 説明をテーブルに描画
+		draw_explain_to_table();		
+		// セリフをテーブル形式で描画
+		show_txt_by_table();
+
+		/*======================================================
+		/*
+		/* 1. セリフにチェックをふる
+		/*
+		/*======================================================*/
+
+		/**
+		 * 台詞にチェックをふる
+		 */
+		$(".markingCheck").click(function() {
+			var name = $(this).parent().parent().attr("class")
+			if ($(this).is(':checked')) {
+
+				$("table.script tr." + name + " td.check_mark").each(function() {
+					$(this).css("background", "#fbf8e5")
+				});	
+
+			} else {
+				$("table.script tr." + name + " td.check_mark").each(function() {
+					$(this).html("")
+					$(this).css("background", "white")
+				});	
+			}
+		});
+
+		/*======================================================
+		/*
+		/* 2. セリフをテーブル形式で描画
+		/*
+		/*======================================================*/		
+
+		/**
+		 * セリフをテーブル形式で描画
+		 */
+		 function show_txt_by_table() {
+			var table_tag = "<table class = 'script'><tr><th></th><th></th><th>　</th></tr>"
+
+			// 行で分割
+			var sc_div = $("#script_write_area")			
+			var line_txts = get_line_txts_from_div(sc_div);
+
+			// 名前だけをセット
+			var names = get_names(line_txts)
+			console.log(names)
+
+			// 行を走査
+			for ( i = 0; i < line_txts.length; i++ ) {
+				// 該当行のテキストをセット
+				var ltxt = line_txts[i];
+				// 名前をセット 
+				var txts = ltxt.split("：");
+				var name = txts[0]
+				// セリフをセット
+				var vc = txts[1]
+
+				// 前の行の氏名をセット
+				var p_name = get_line_name(line_txts, i - 1)
+
+				// 前の行の氏名と異なれば新しい行へ
+				if ( p_name != name ) {
+					// 1行目以外は閉じタグを追加
+					if ( i != 0 ) {
+						table_tag += "</td></tr>"
+					}
+
+					var ncl = get_name_tag(names, name)
+
+					table_tag += "<tr class = '" + ncl + "'><td class = 'check_mark'> </td><td class = 'name'><span class = '" + ncl + "'>" + name + "</span></td>" + "<td class = 'text'>" + vc 							
+				// 前の行と氏名が同じなら改行＋セリフのみ
+				} else {
+					table_tag += "<br />" + vc
+				}
+			}
+
+			table_tag += "</tr></table>"
+
+			// 描画
+			$("#script_show_area").html(table_tag);
+
+			//console.log(table_tag)
+		 }
+
+		 /**
+		  * divタグから：付の行のテキストのみを配列で返す
+		  */ 
+		 function get_line_txts_from_div(div_block) {
+			var line_txts = []
+
+			// 行で分割
+			var splits = div_block.text().split(/\r\n|\n/);			
+			for (i = 0; i < splits.length; i++) {
+				var line_txt = splits[i].trim();
+
+				// :を含めば
+				if (line_txt.indexOf("：") != - 1) {
+					line_txts.push(line_txt)
+				}
+			}
+
+			return line_txts;
+		 }
+
+		 /**
+		  * 該当行の名前を返す
+		  */ 
+		 function get_line_name(line_txts, i) {
+			if ( i < 0 ) {
+				return ""
+			}
+
+			var ltxt = line_txts[i]
+			var txts = ltxt.split("：");
+
+			return txts[0]
+		 }
+
+		 /**
+		  * 名前だけを配列で返す
+		  */
+		function get_names(line_txts) {
+			var names = []
+
+			for ( i = 0; i < line_txts.length; i++ ) {
+				// 該当行のテキストをセット
+				var ltxt = line_txts[i];
+
+				// 名前をセット 
+				var txts = ltxt.split("：");
+				var name = txts[0]
+
+				if ( names.indexOf(name) == -1 ) {
+					names.push(name)
+				}
+			}
+
+			return names
+		}
+
+		/**
+		 * 該当の名前のタグを返す
+		 */ 
+		function get_name_tag(names, name) {
+			if ( name == "0") {
+				return "narration"
+			}
+
+			var i = names.indexOf(name)
+
+			return "chara_" + i
+		}
+
+		/**
+		 * 説明をテーブルに描画
+		 */ 
+		function draw_explain_to_table() {
+			var c_div = $("#chara_explain")
+			// コロン付きの行のテキストを取得
+			var exp_line_txts = get_line_txts_from_div(c_div)
+
+			TABLE_ROW_COUNT = 5
+
+			// 行を非表示
+			for ( i = 0; i < TABLE_ROW_COUNT; i++ ) {
+				// 行タグをセット
+				var tr_tag = $("table#chara tr.chara_" + i)
+				tr_tag.hide()	
+			}
+
+			var n = ""
+			
+			// 行を走査
+			for ( i = 0; i < exp_line_txts.length; i++ ) {
+				// 該当行の名前、性別、説明をセット
+				var name = get_line_name(exp_line_txts, i)
+				var sex = get_line_sex(exp_line_txts, i)
+				var exp = get_line_explain(exp_line_txts, i)
+
+				// 行タグをセット
+				var tr_tag = $("table#chara tr.chara_" + i)	
+				// 名前用のタグをセット				
+				var sp_tag = tr_tag.find("span") 
+				sp_tag.text(name)
+				// セリフ数タグをセット				
+				var count_tag = tr_tag.find("td.count")
+				// セリフ数をセット
+				n = get_target_chara_voice_count(name)
+				count_tag.text(n)						
+				// 性別タグをセット				
+				var sex_tag = tr_tag.find("td.sex")
+				sex_tag.text(sex)		
+				// 説明タグをセット				
+				var exp_tag = tr_tag.find("td.explain")
+				exp_tag.text(exp)	
+				
+				tr_tag.show()
+			}
+		}
+
+		 /**
+		  * 該当行の性別を返す
+		  */ 
+		function get_line_sex(line_txts, i) {
+			if ( i < 0 ) {
+				return ""
+			}
+
+			var ltxt = line_txts[i]
+			var txts = ltxt.split("：");
+
+			if ( 2 <= txts.length ) {
+				return txts[1]
+			}
+
+			return ""
+		 }		
+
+		 /**
+		  * 該当行の説明を返す
+		  */ 
+		  function get_line_explain(line_txts, i) {
+			if ( i < 0 ) {
+				return ""
+			}
+
+			var ltxt = line_txts[i]
+			var txts = ltxt.split("：");
+
+			if ( 3 <= txts.length ) {
+				return txts[2]
+			}
+
+			return ""
+		 }				
+		 
+		 /**
+		  * セリフ数を返す
+		  */ 
+		function get_target_chara_voice_count(c_name) {
+			var n = 0
+			var sc_div = $("#script_write_area")	
+			var sc = sc_div.text()	
+			console.log(sc)
+			var keyword = c_name + "："
+
+			n = (String(sc).match(new RegExp(String(keyword), 'g')) || []).length
+			return n + " "
+		}
+		
+	});
+</script>	
+</head>
+<body>
+	<header>
+		<div class = "container">			
+			<div class = "row">
+				<div class = "col-1" id = "logo_img">			
+					<img src = "./img/pc_cat.jpeg" width = "60px" />
+				</div>
+				<div class = "col-9" id = "logo_text">
+					<img src = "./img/logo.png" width = "100px" />					
+				</div>
+			</div> 
+		</div>			
+	</header>
+
+	<!-- ナビゲーションバー -->
+	<nav class = "navbar-expand-lg navbar-dark bg-dark">
+		<div class = "container">				
+			<a class = "navbar-brand mr-auto" href = "#">TOP</a>　
+			<a class = "navbar-brand mr-auto" href = "#">台本一覧</a>　
+			<a class = "navbar-brand mr-auto" href = "#">台本投稿</a>　
+		</div>
+	</nav>
+
+	<!-- メイン領域 -->
+	<div id = "main">
+		<div class = "container">	
+			
+			<div id = "information_area">
+				<h3 class = "green">新着情報</h3>
+				<p>お知らせはありません。</p>
+			</div>
+
+			<div class = "row"> 
+				<h2 class = "green">説明</h2>
+			</div>
+
+			<!-- 説明描画用テーブル -->
+			<table id="desc" class = "col-12">
+				<tr>
+					<th style = ""></th>
+					<th style = ""></th>
+				</tr>
+				<tr>
+					<th class = "h_txt">タイトル</th>
+					<td>声劇・朗読用台本『星の王子さま』前編（後編は<a href="./LittlePrince2.html">こちら</a>）</td>
+				</tr>
+				<tr>
+					<th class = "h_txt">原作者</th>
+					<td>アントワーヌ・ド・サン＝テグジュペリ</td>
+				</tr>
+				<tr>
+					<th class = "h_txt">登場キャラ数</th>
+					<td>男：1　女：1　不問：3</td>
+				</tr>
+				<tr>
+					<th class = "h_txt">セリフ数</th>
+					<td>151</td>
+				</tr>
+				<tr>
+					<th class = "h_txt">目安時間</th>
+					<td>20分</td>
+				</tr>		
+				<tr>
+					<th class = "h_txt">ジャンル</th>
+					<td>童話</td>
+				</tr>						
+				<tr>
+					<th class = "h_txt">著作権</th>
+					<td>フリー。原作も著作権が切れていますので、連絡無しでご自由にお使いください。</td>
+				</tr>	
+			</table>
+		
+			<div class = "row"> 
+				<h2 class = "green">登場人物</h2>
+			</div>
+
+			<!-- キャラ描画用テーブル -->
+			<table id="chara" class = "col-12">
+				<tr>
+					<th style = "width:5%"></th>
+					<th style = "width:10%">名前</th>
+					<th style = "width:10%">性別</th>
+					<th style = "width:10%">セリフ数</th>
+					<th style = "width:65%">説明</th>
+				</tr>
+				<tr class = "chara_0">
+					<td class="check"><input type = "checkbox" class="markingCheck" /></td>
+					<td class="name"><span></span></td>
+					<td class="sex"></td>
+					<td class="count"></td>
+					<td class="explain"></td>
+				</tr>
+				<tr class = "chara_1">
+					<td class="check"><input type = "checkbox" class="markingCheck" /></td>
+					<td class="name"><span></span></td>
+					<td class="sex"></td>
+					<td class="count"></td>
+					<td class="explain"></td>
+				</tr>
+				<tr class = "chara_2">
+					<td class="check"><input type = "checkbox" class="markingCheck" /></td>
+					<td class="name"><span></span></td>
+					<td class="sex"></td>
+					<td class="count"></td>
+					<td class="explain"></td>
+				</tr>
+				<tr class = "chara_3">
+					<td class="check"><input type = "checkbox" class="markingCheck" /></td>
+					<td class="name"><span></span></td>
+					<td class="sex"></td>
+					<td class="count"></td>
+					<td class="explain"></td>
+				</tr>
+				<tr class = "chara_4">
+					<td class="check"><input type = "checkbox" class="markingCheck" /></td>
+					<td class="name"><span></span></td>
+					<td class="sex"></td>
+					<td class="count"></td>
+					<td class="explain"></td>
+				</tr>									
+			</table>
+			<div id="check_explain" class="text-danger">
+				※ チェックボックスをオンにすると、セリフの左側に印がつきます。
+			</div>
+	
+			<div class = "row"> 
+				<h2 class = "green">本編</h2>
+			</div>			
+
+			<!-- セリフ描画欄 -->
+			<div id = "script_show_area">
+			</div>		
+		</div>
+	</div>
+
+	<footer>
+		<!-- 
+======================================================	
+以下のdivタグ内にキャラの説明を書いてください。
+（例） 
+	お嬢様：女：キャラ説明
+	執事：男：キャラ説明			 
+======================================================
+-->
+<div id = "chara_explain" class = "d-none">
+
+お嬢様：女：天真爛漫な性格
+執事：男：っ気のある執事
+
+</div>		
+
+<!-- 
+======================================================	
+以下のdivタグ内にセリフを書いてください。
+（例） 
+	お嬢様：ハァァァァ……！
+	執事：くっ……。
+======================================================
+-->
+<div id = "script_write_area" class = "d-none">
+
+お嬢様：ハァァァァ……！　シャドウ・ストライク！
+執事：くっ……。エターナル・フォース・ブリザード！
+お嬢様：はあ……はあ……。
+執事：ぐっ……。
+お嬢様：なかなかやるわね、ルイ。
+執事：お嬢様、いつの間にそこまで闇の力を……。
+お嬢様：ふふ、あなたに隠れて猛特訓していたの。
+お嬢様：しかも私は、あと三回も変身を残しているわ。この意味が分かる……？
+執事：なるほど……大ピンチ、というわけですか……。
+お嬢様：ごめんね。私はもう、貴方より強くなりすぎてしまったの……。
+お嬢様：大人しくここで散って頂戴？　あなたの屍を乗り越えて、私はまた一つ強くなるわ。
+執事：ふっ、相変わらず努力家な方だ……。そういうところ、好きですよ。
+お嬢様：えっ！　す、好き……！？　あ、ありがとう……そ、その……私も……ゴニョゴニョ……。
+執事：えいっ。超必殺。
+お嬢様：……あ。ああーー！！　ずるいずるいずるいずるい！　不意打ちずるいっ！　まだ変身もしてないのに！！
+執事：甘いですよお嬢様？　勝負の最中に気を抜くなんて。
+お嬢様：だ、だって……。ルイが急にあんなこと言うんだもん。
+執事：おやあ……？　私、何か言いましたっけ……？
+お嬢様：それは……ほら……ゴニョゴニョ……あーもう！　再戦するわよ！！
+執事：ふふっ、ゲームで遊んでる時のお嬢様はホント可愛いですね。あ、さっきの言葉、本心ですよ？
+お嬢様：ぐぬぬ……。ゲーム中の私語禁止にしようかしら……。
+お嬢様：　
+お嬢様：　
+0：数時間後
+お嬢様：うう、また負けた……。０勝９９敗……。
+執事：まだまだですね、お嬢様は言葉責めに弱すぎます。
+
+</div>		
+	</footer>
+
+</body>
